@@ -94,13 +94,13 @@ public class Seccion {
     }
 
     public void mostarFilas() {
-        for(Fila fila : filas) {
+        for (Fila fila : filas) {
             System.out.println("Fila " + fila.getId() + " - " + fila.asientosEnFila() + " asientos");
         }
     }
 
     public void mostrarAsientosDisponibles() {
-        for(Fila fila : filas) {
+        for (Fila fila : filas) {
             System.out.println("Fila " + fila.getId() + " - " + fila.listarAsientosDisponibles());
         }
     }
@@ -118,6 +118,12 @@ public class Seccion {
 
     public void calcularVentasSeccion() {
 
+    }
+
+    public boolean hayAsientosDisponibles(int boletosAVender) {
+        // TODO: Validar que haya filas, sino hay es 0
+        // TODO: obtener cuantos asientos hay en cada fila... usar for... fila.asientos.size()
+        // TODO: comparar si boletosAVender <= asientosDisponibles
     }
 
     public String getNombre() {
