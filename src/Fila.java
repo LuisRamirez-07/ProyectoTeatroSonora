@@ -41,7 +41,28 @@ public class Fila {
     }
 
     public int obtenerCantidadDeAsientosOcupados() {
-        return (int) asientos.stream().filter(asiento -> asiento.isOcupado).count();
+        int asientosOcupados = 0;
+        for (Asiento asiento : asientos) {
+            if (asiento.isOcupado) asientosOcupados++;
+        }
+        return asientosOcupados;
+    }
+
+    public int obtenerCantidadDeAsientosDisponibles() {
+        int asientosDesocupados = 0;
+        for (Asiento asiento : asientos) {
+            if (!asiento.isOcupado) asientosDesocupados++;
+        }
+        return asientosDesocupados;
+    }
+
+    public Asiento obtenerAsiento(int id) {
+        for (Asiento asiento : asientos) {
+            if (asiento.id == id) {
+                return asiento;
+            }
+        }
+        return null;
     }
 
     public String listarAsientosDisponibles() {

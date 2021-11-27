@@ -80,7 +80,7 @@ public class Seccion {
         return fila;
     }
 
-    private Fila obtenerFila(char filaId) {
+    public Fila obtenerFila(char filaId) {
         for (Fila fila : filas) {
             if (fila.getId() == filaId) {
                 return fila;
@@ -120,13 +120,27 @@ public class Seccion {
 
     }
 
-    public boolean hayAsientosDisponibles(int boletosAVender) {
-        // TODO: Validar que haya filas, sino hay es 0
-        // TODO: obtener cuantos asientos hay en cada fila... usar for... fila.asientos.size()
-        // TODO: comparar si boletosAVender <= asientosDisponibles
+    public int obtenerAsientosDisponibles() {
+        int asientosDisponibles = 0;
+        for (Fila fila : filas) {
+            asientosDisponibles += fila.obtenerCantidadDeAsientosDisponibles();
+        }
+        return asientosDisponibles;
+    }
+
+    public List<Character> obtenerFilasValidas() {
+        List<Character> filasValidas = new LinkedList<>();
+        for (Fila fila : filas) {
+            filasValidas.add(fila.getId());
+        }
+        return filasValidas;
     }
 
     public String getNombre() {
         return nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
     }
 }

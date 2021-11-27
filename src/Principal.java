@@ -4,10 +4,11 @@ import java.util.Scanner;
 public class Principal {
     private static final Scanner leer = new Scanner(System.in);
     private static final Seccion[] secciones = new Seccion[]{
-                new Seccion("VIP"),
-                new Seccion("Palcos"),
-                new Seccion("Normal")
-        };
+            new Seccion("VIP"),
+            new Seccion("Palcos"),
+            new Seccion("Normal")
+    };
+    private static final OperBoletos operBoletos = new OperBoletos(secciones);
 
     public static void main(String[] args) {
         int opcion;
@@ -23,7 +24,7 @@ public class Principal {
 
     /**
      * Función que imprime el menu principal
-     * */
+     */
     private static void imprimirMenu() {
         System.out.println("Menú de opciones");
         System.out.println(
@@ -44,8 +45,8 @@ public class Principal {
     /**
      * Función que ejecuta una opción dada por el usuario
      *
-     * @param opcion    (int) valor del 1 al 10
-     * */
+     * @param opcion (int) valor del 1 al 10
+     */
     private static void ejecutarOpcion(int opcion) {
         Seccion seccion;
         switch (opcion) {
@@ -84,6 +85,7 @@ public class Principal {
                 }
                 break;
             case 6:
+                operBoletos.venderBoletos();
                 break;
             case 7:
                 break;
@@ -109,11 +111,14 @@ public class Principal {
         leer.nextLine();
 
         switch (opcion) {
-            case 1: return secciones[0];
-            case 2: return secciones[1];
-            case 3: return secciones[2];
+            case 1:
+                return secciones[0];
+            case 2:
+                return secciones[1];
+            case 3:
+                return secciones[2];
             default:
-                System.out.println("La opción no es validad...");
+                System.out.println("La opción no es valida...");
                 return null;
         }
     }
