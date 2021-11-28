@@ -36,7 +36,6 @@ public class OperBoletos {
             Seccion seccion;
             while (true) {
                 seccion = preguntarPorSeccion();
-                if (seccion == null) continue;
                 if (seccion.obtenerAsientosDisponibles() == 0) {
                     System.out.println("No hay asientos disponibles en esta sección");
                     continue;
@@ -47,7 +46,6 @@ public class OperBoletos {
             Fila fila;
             while (true) {
                 fila = preguntarPorFila(seccion);
-                if (fila == null) continue;
                 if (fila.obtenerCantidadDeAsientosDisponibles() == 0) {
                     System.out.println("No hay asientos disponibles en esta fila");
                     continue;
@@ -56,6 +54,7 @@ public class OperBoletos {
             }
 
             Asiento asiento = preguntarPorAsiento(fila);
+
             asiento.isOcupado = true;
             costo += seccion.getPrecio();
             String boletoId = seccion.getNombre() + "-" + fila.getId() + asiento.getId();
@@ -94,28 +93,27 @@ public class OperBoletos {
 
             if (opcion.equals("M")) {
                 mostrarBoletosDisponibles();
+                continue;
             }
 
-        } while (opcion.equals("M"));
-
-        switch (opcion) {
-            case "1":
-                return secciones[0];
-            case "2":
-                return secciones[1];
-            case "3":
-                return secciones[2];
-            default:
-                System.out.println("La opción no es valida...");
-                return null;
-        }
+            switch (opcion) {
+                case "1":
+                    return secciones[0];
+                case "2":
+                    return secciones[1];
+                case "3":
+                    return secciones[2];
+                default:
+                    System.out.println("La opción no es valida...");
+            }
+        } while (true);
     }
 
     private Fila preguntarPorFila(Seccion seccion) {
         while (true) {
-            seccion.mostarFilas();
+            seccion.mostrarAsientosDisponiblesPorFila();
             System.out.println();
-            System.out.println("Seleccione la fila: ");
+            System.out.print("Seleccione la fila: ");
 
             String filaIdStr = scanner.nextLine();
             if (filaIdStr.length() != 1) {
@@ -123,12 +121,19 @@ public class OperBoletos {
                 continue;
             }
 
-            char filaID = filaIdStr.charAt(0);
+            char filaID = filaIdStr.toUpperCase().charAt(0);
             if (!seccion.obtenerFilasValidas().contains(filaID)) {
                 System.out.println("Opción no valida, intente de nuevo");
                 continue;
             }
-            return seccion.obtenerFila(filaID);
+
+            Fila fila = seccion.obtenerFila(filaID);
+            if (fila == null) {
+                System.out.println("Opción no valida, intente de nuevo");
+                continue;
+            }
+
+            return fila;
         }
     }
 
@@ -137,7 +142,7 @@ public class OperBoletos {
         while (true) {
             System.out.println("Asientos: " + asientos);
             System.out.println();
-            System.out.println("Seleccione un asiento: ");
+            System.out.print("Seleccione un asiento: ");
 
             if (!scanner.hasNextInt()) {
                 System.out.println("Opción no valida, intente de nuevo");

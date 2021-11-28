@@ -99,6 +99,12 @@ public class Seccion {
         }
     }
 
+    public void mostrarAsientosDisponiblesPorFila() {
+        for (Fila fila : filas) {
+            System.out.println("Fila " + fila.getId() + " - " + fila.obtenerCantidadDeAsientosDisponibles() + " asientos");
+        }
+    }
+
     public void mostrarAsientosDisponibles() {
         for (Fila fila : filas) {
             System.out.println("Fila " + fila.getId() + " - " + fila.listarAsientosDisponibles());
